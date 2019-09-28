@@ -15,6 +15,7 @@ class MovieDBClient {
         
         case search(String)
         case genres
+        case thumbnailImage(String)
     
         var stringValue: String {
             switch self {
@@ -23,6 +24,9 @@ class MovieDBClient {
                 
                 case .genres:
                     return "\(Endpoints.base)/genre/movie/list\(apiSuffix)&language=en-US"
+                
+                case .thumbnailImage(let posterPath):
+                    return "https://image.tmdb.org/t/p/w185/" + posterPath
             }
         }
         
@@ -138,6 +142,15 @@ class MovieDBClient {
         }
             
         return Secrets(apiKey: apiKey)
+    }
+    
+    class func downloadThumbnailImage(path: String, completion: @escaping (Data?, Error?) -> Void) {
+        let task = URLSession.shared.dataTask(with: Endpoints.thumbnailImage(path).url) { data, response, error in
+            DispatchQueue.main.async {
+                completion(data, error)
+            }
+        }
+        task.resume()
     }
 }
 

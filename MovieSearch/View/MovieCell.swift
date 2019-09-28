@@ -13,6 +13,7 @@ class MovieCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var releaseYearLabel: UILabel!
     @IBOutlet weak var genreLabel: UILabel!
+    @IBOutlet weak var thumbnail: UIImageView!
     
     func configure(movie: Movie, genres availableGenres: [Genre]) {
         
@@ -34,6 +35,17 @@ class MovieCell: UITableViewCell {
             
             genreLabel.text = genreNames.joined(separator: ", ")
             
+        }
+        
+        if let posterPath = movie.posterPath {
+            MovieDBClient.downloadThumbnailImage(path: posterPath) { data, error in
+                guard let data = data else {
+                    return
+                }
+                
+                let image = UIImage(data: data)
+                self.thumbnail.image = image
+            }
         }
         
     }

@@ -95,6 +95,7 @@
                                                 <connections>
                                                     <outlet property="genreLabel" destination="K0M-SH-KCT" id="Gdo-m3-NL1"/>
                                                     <outlet property="releaseYearLabel" destination="AeQ-zG-Cmt" id="O0Y-gU-bWk"/>
+                                                    <outlet property="thumbnail" destination="Dkc-wt-qTh" id="XbQ-qy-gPs"/>
                                                     <outlet property="titleLabel" destination="roS-Kv-ojc" id="za1-RC-DHS"/>
                                                 </connections>
                                             </tableViewCell>
