@@ -14,11 +14,15 @@ class MovieDBClient {
         static let base = "https://api.themoviedb.org/3"
         
         case search(String)
+        case genres
     
         var stringValue: String {
             switch self {
                 case .search(let query):
-                    return "\(Endpoints.base)/search/movie\(apiPostfix)&query=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"
+                    return "\(Endpoints.base)/search/movie\(apiSuffix)&query=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"
+                
+                case .genres:
+                    return "\(Endpoints.base)/genre/movie/list\(apiSuffix)&language=en-US"
             }
         }
         
@@ -26,13 +30,32 @@ class MovieDBClient {
             return URL(string: stringValue)!
         }
         
-        var apiPostfix: String {
+        var apiSuffix: String {
             get {
                 let secrets = getSecrets()
                 return "?api_key=\(secrets.apiKey)"
             }
         }
 
+    }
+    
+    class func getGenres(completion: @escaping ([Genre], Error?) -> Void) -> URLSessionTask {
+        
+        let task = taskForGETRequest(
+            url: Endpoints.genres.url,
+            responseType: GenreResults.self
+        ) { (response, error) in
+            
+            if let response = response {
+                completion(response.genres, nil)
+            } else {
+                completion([], error)
+            }
+            
+        }
+        
+        return task
+        
     }
     
     class func searchMovies(query: String, completion: @escaping ([Movie], Error?) -> Void) -> URLSessionTask {

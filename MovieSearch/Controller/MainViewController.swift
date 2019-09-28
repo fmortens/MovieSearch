@@ -14,12 +14,20 @@ class MainViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var movies = [Movie]()
-    var searchTask: URLSessionTask?
+    var genres = [Genre]()
+    
     var selectedIndex = 0
+    
+    var searchTask: URLSessionTask?
+    var genreTask: URLSessionTask?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        genreTask = MovieDBClient.getGenres() { (genres, error) in
+            self.genres = genres
+        }
     }
 
 }
@@ -66,7 +74,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell") as! MovieCell
         
-        cell.configure(movie: movies[indexPath.row])
+        cell.configure(movie: movies[indexPath.row], genres: genres)
         
         return cell
     }
