@@ -20,9 +20,6 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
-       
-        
     }
 
 }
@@ -69,20 +66,14 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell") as! MovieCell
         
-        
         cell.configure(movie: movies[indexPath.row])
-        
-        
-//        cell.textLabel?.text = "\(movie.title)" + (movie.releaseYear.count > 0 ? " - \(movie.releaseYear)" : "")
-        
-        
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 180
+        return 150
         
     }
     

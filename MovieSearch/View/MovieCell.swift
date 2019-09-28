@@ -10,6 +10,7 @@ import UIKit
 
 class MovieCell: UITableViewCell {
 
+    @IBOutlet weak var titleLabel: UILabel!
     
     
     override func awakeFromNib() {
@@ -20,7 +21,12 @@ class MovieCell: UITableViewCell {
     
     func configure(movie: Movie) {
         
-//        titleLabel.text = movie.title != "" ? movie.title : movie.originalTitle
+        titleLabel.numberOfLines = 0
+        titleLabel.lineBreakMode = .byWordWrapping
+        titleLabel.text = movie.title != "" ? movie.title : movie.originalTitle
+        titleLabel.textAlignment = .right
+        
+        
 //        dateLabel.text = "Released \(movie.releaseYear))"
 //        genreLabel.text = "\(movie.genreIds)"
         
