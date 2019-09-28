@@ -60,19 +60,19 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie title" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="roS-Kv-ojc">
-                                                            <rect key="frame" x="158" y="19" width="228" height="24"/>
-                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                            <rect key="frame" x="158" y="11" width="228" height="24"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Released 2019" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AeQ-zG-Cmt">
-                                                            <rect key="frame" x="158" y="51" width="228" height="20.5"/>
+                                                            <rect key="frame" x="158" y="43" width="228" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genre" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K0M-SH-KCT" userLabel="Genre Label">
-                                                            <rect key="frame" x="158" y="87.5" width="228" height="20.5"/>
+                                                            <rect key="frame" x="158" y="71.5" width="228" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -83,8 +83,8 @@
                                                         <constraint firstAttribute="trailingMargin" secondItem="roS-Kv-ojc" secondAttribute="trailing" constant="8" id="8o7-74-6YF"/>
                                                         <constraint firstAttribute="trailingMargin" secondItem="AeQ-zG-Cmt" secondAttribute="trailing" constant="8" id="Dfg-lD-7S9"/>
                                                         <constraint firstItem="Dkc-wt-qTh" firstAttribute="top" secondItem="o3O-IC-iKb" secondAttribute="top" id="EIA-u5-ykV"/>
-                                                        <constraint firstItem="roS-Kv-ojc" firstAttribute="top" secondItem="o3O-IC-iKb" secondAttribute="topMargin" constant="8" id="Ky1-5R-ihX"/>
-                                                        <constraint firstItem="K0M-SH-KCT" firstAttribute="top" secondItem="AeQ-zG-Cmt" secondAttribute="bottom" constant="16" id="VAi-Ro-wSy"/>
+                                                        <constraint firstItem="roS-Kv-ojc" firstAttribute="top" secondItem="o3O-IC-iKb" secondAttribute="topMargin" id="Ky1-5R-ihX"/>
+                                                        <constraint firstItem="K0M-SH-KCT" firstAttribute="top" secondItem="AeQ-zG-Cmt" secondAttribute="bottom" constant="8" id="VAi-Ro-wSy"/>
                                                         <constraint firstItem="Dkc-wt-qTh" firstAttribute="leading" secondItem="o3O-IC-iKb" secondAttribute="leading" id="aS5-Ye-9gp"/>
                                                         <constraint firstItem="K0M-SH-KCT" firstAttribute="leading" secondItem="Dkc-wt-qTh" secondAttribute="trailing" constant="8" id="goq-Kw-CZC"/>
                                                         <constraint firstItem="AeQ-zG-Cmt" firstAttribute="leading" secondItem="Dkc-wt-qTh" secondAttribute="trailing" constant="8" id="rQ6-95-pOd"/>
