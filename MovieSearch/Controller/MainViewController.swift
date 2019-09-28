@@ -12,6 +12,7 @@ class MainViewController: UIViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     var movies = [Movie]()
     var genres = [Genre]()
@@ -92,5 +93,19 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
 //        performSegue(withIdentifier: "showDetail", sender: nil)
 //        tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+}
+
+extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FilterCell", for: indexPath)
+        
+        return cell
+    }
+    
     
 }
