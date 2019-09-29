@@ -21,7 +21,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nZW-O3-SLs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-369" y="137"/>
+            <point key="canvasLocation" x="-675" y="-177"/>
         </scene>
         <!--Movie Search-->
         <scene sceneID="HdF-Ie-DzZ">
@@ -181,11 +181,28 @@
                         <outlet property="movieTableView" destination="csg-wt-buk" id="SmD-y1-EKr"/>
                         <outlet property="searchBar" destination="oGG-MV-ktE" id="Yon-u1-uNd"/>
                         <outlet property="sortOptionsCollectionView" destination="YOn-yn-6XU" id="olc-QV-T9X"/>
+                        <segue destination="qXC-uJ-gtC" kind="show" identifier="ShowMovieDetails" id="SPm-Cg-0F5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uhl-by-zgq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="611.59420289855075" y="136.60714285714286"/>
+            <point key="canvasLocation" x="600" y="-177"/>
+        </scene>
+        <!--Movie Details-->
+        <scene sceneID="Y9U-37-30h">
+            <objects>
+                <viewController id="qXC-uJ-gtC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NMO-VQ-Ptg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="Ncr-QV-XyP"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Movie Details" id="GNf-NI-bYz"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qVB-CB-k7r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1935" y="-177"/>
         </scene>
     </scenes>
 </document>
