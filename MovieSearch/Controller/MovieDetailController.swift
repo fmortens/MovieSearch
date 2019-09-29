@@ -39,6 +39,12 @@ class MovieDetailController: UIViewController {
                 self.movieTitleLabel.text = movieDetails.title
                 self.movieDescriptionLabel.text = movieDetails.overview
                 
+                if let releaseDate = movieDetails.releaseDate {
+                    self.movieReleaseLabel.text = "Released \(releaseDate)"
+                } else {
+                    self.movieReleaseLabel.isHidden = true
+                }
+                
                 if let posterPath = movieDetails.posterPath {
                     MovieDBClient.downloadPosterImage(path: posterPath) { data, error in
                         guard let data = data else {
