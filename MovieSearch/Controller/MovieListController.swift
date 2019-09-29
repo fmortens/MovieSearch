@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum SortOption: String, CaseIterable {
+    case Year = "Year"
+    case Title = "Title"
+}
+
 class MovieListController: UIViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!
@@ -22,7 +27,7 @@ class MovieListController: UIViewController {
     var searchTask: URLSessionTask?
     var genreTask: URLSessionTask?
     
-    let sortOptions = ["Release date", "Title"]
+    let sortOptions: [SortOption] = [.Year, .Title]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +36,26 @@ class MovieListController: UIViewController {
         genreTask = MovieDBClient.getGenres() { (genres, error) in
             self.genres = genres
         }
+    }
+    
+    func sortMovies() {
+        
+        let selectedSortOption = sortOptions[selectedIndex]
+        
+        movies.sort { (first, second) -> Bool in
+            
+            switch selectedSortOption {
+                case .Title:
+                    return first.title < second.title
+                
+                default:
+                    // Setting the default to release year since it is the first of only two
+                    return first.releaseYear > second.releaseYear
+                    
+            }
+        }
+        
+        movieTableView.reloadData()
     }
 
 }
@@ -42,7 +67,9 @@ extension MovieListController: UISearchBarDelegate {
                 
         searchTask = MovieDBClient.searchMovies(query: searchText) { (movies, error) in
             self.movies = movies
-            self.movieTableView.reloadData()
+            
+            self.sortMovies()
+            //self.movieTableView.reloadData()
         }
     }
     
@@ -119,7 +146,9 @@ extension MovieListController: UICollectionViewDataSource, UICollectionViewDeleg
             
             updateCell(withIndexPath: ip)
             
-            //let selectedSortOption = sortOptions[indexPath.row]
+            selectedIndex = indexPath.row
+            
+            sortMovies()
         }
         
         return true
@@ -137,7 +166,7 @@ extension MovieListController: UICollectionViewDataSource, UICollectionViewDeleg
         
         let cell = sortOptionsCollectionView.cellForItem(at: indexPath) as! SortOptionCell
         
-        cell.sortOptionLabel.text = sortOptions[indexPath.row]
+        cell.sortOptionLabel.text = SortOption.allCases[indexPath.row].rawValue
         
         var cellColor: UIColor = .clear
         var textColor: UIColor = .secondaryLabel
