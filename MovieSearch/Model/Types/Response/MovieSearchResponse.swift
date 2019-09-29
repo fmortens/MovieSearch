@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct MovieResults: Codable {
+struct MovieSearchResponse: Codable {
     
     let page: Int
     let results: [Movie]

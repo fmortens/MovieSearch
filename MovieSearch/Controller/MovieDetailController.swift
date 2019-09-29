@@ -10,14 +10,51 @@ import UIKit
 
 class MovieDetailController: UIViewController {
     
+    @IBOutlet weak var moviePosterView: UIImageView!
+    @IBOutlet weak var movieTitleLabel: UILabel!
+    @IBOutlet weak var movieReleaseLabel: UILabel!
+    @IBOutlet weak var movieDescriptionLabel: UILabel!
+    
     var movieId: Int?
+    var detailsTask: URLSessionTask?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
-        print("Showing movie id \(movieId ?? 0)")
+        if let id = self.movieId {
+            updateUI(movieId: id)
+        } else {
+            print("Missing movie id")
+        }
+    }
+    
+    func updateUI(movieId id: Int) {
+        
+        detailsTask = MovieDBClient.getMovieDetails(byId: id) { (details, error) in
+            
+            if let movieDetails = details {
+                
+                self.movieTitleLabel.text = movieDetails.title
+                self.movieDescriptionLabel.text = movieDetails.overview
+                
+                if let posterPath = movieDetails.posterPath {
+                    MovieDBClient.downloadPosterImage(path: posterPath) { data, error in
+                        guard let data = data else {
+                            return
+                        }
+                        
+                        let image = UIImage(data: data)
+                        self.moviePosterView.image = image
+                    }
+                }
+                
+            } else {
+                print("Could not load movie details")
+            }
+        }
+        
     }
     
 

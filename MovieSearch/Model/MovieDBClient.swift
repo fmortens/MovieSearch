@@ -8,25 +8,38 @@
 
 import Foundation
 
+struct Secrets {
+    var apiKey: String
+}
+
 class MovieDBClient {
     
+    // MARK: - URL
     enum Endpoints {
         static let base = "https://api.themoviedb.org/3"
         
-        case search(String)
-        case genres
-        case thumbnailImage(String)
+        case Search(String)
+        case Genres
+        case ThumbnailImage(String)
+        case PosterImage(String)
+        case MovieDetails(Int)
     
         var stringValue: String {
             switch self {
-                case .search(let query):
+                case .Search(let query):
                     return "\(Endpoints.base)/search/movie\(apiSuffix)&query=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"
                 
-                case .genres:
+                case .Genres:
                     return "\(Endpoints.base)/genre/movie/list\(apiSuffix)&language=en-US"
                 
-                case .thumbnailImage(let posterPath):
+                case .ThumbnailImage(let posterPath):
                     return "https://image.tmdb.org/t/p/w185/" + posterPath
+                
+                case .MovieDetails(let movieId):
+                    return "\(Endpoints.base)/movie/\(movieId)\(apiSuffix)&language=en-US"
+                
+                case .PosterImage(let posterPath):
+                    return "https://image.tmdb.org/t/p/w500/" + posterPath
             }
         }
         
@@ -43,44 +56,7 @@ class MovieDBClient {
 
     }
     
-    class func getGenres(completion: @escaping ([Genre], Error?) -> Void) -> URLSessionTask {
-        
-        let task = taskForGETRequest(
-            url: Endpoints.genres.url,
-            responseType: GenreResults.self
-        ) { (response, error) in
-            
-            if let response = response {
-                completion(response.genres, nil)
-            } else {
-                completion([], error)
-            }
-            
-        }
-        
-        return task
-        
-    }
-    
-    class func searchMovies(query: String, completion: @escaping ([Movie], Error?) -> Void) -> URLSessionTask {
-        
-        let task = taskForGETRequest(
-            url: Endpoints.search(query).url,
-            responseType: MovieResults.self
-        ) {(response, error) in
-            
-            if let response = response {
-                completion(response.results, nil)
-            } else {
-                completion([], error)
-            }
-            
-        }
-        
-        return task
-        
-    }
-    
+    // MARK: - Utilities
     class func taskForGETRequest<ResponseType: Decodable>(
         url: URL,
         responseType: ResponseType.Type,
@@ -88,6 +64,7 @@ class MovieDBClient {
         ) -> URLSessionTask {
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            
             guard let data = data else {
                 DispatchQueue.main.async {
                     completion(nil, error)
@@ -121,7 +98,6 @@ class MovieDBClient {
         return task
     }
     
-    
     class func getSecrets() -> Secrets {
         
         guard
@@ -144,16 +120,81 @@ class MovieDBClient {
         return Secrets(apiKey: apiKey)
     }
     
+    // MARK: - Network operations
+    
+    class func getGenres(completion: @escaping ([Genre], Error?) -> Void) -> URLSessionTask {
+        
+        let task = taskForGETRequest(
+            url: Endpoints.Genres.url,
+            responseType: GenreResponse.self
+        ) { (response, error) in
+            
+            if let response = response {
+                completion(response.genres, nil)
+            } else {
+                completion([], error)
+            }
+            
+        }
+        
+        return task
+        
+    }
+    
+    class func searchMovies(query: String, completion: @escaping ([Movie], Error?) -> Void) -> URLSessionTask {
+        
+        let task = taskForGETRequest(
+            url: Endpoints.Search(query).url,
+            responseType: MovieSearchResponse.self
+        ) {(response, error) in
+            
+            if let response = response {
+                completion(response.results, nil)
+            } else {
+                completion([], error)
+            }
+            
+        }
+        
+        return task
+        
+    }
+    
     class func downloadThumbnailImage(path: String, completion: @escaping (Data?, Error?) -> Void) {
-        let task = URLSession.shared.dataTask(with: Endpoints.thumbnailImage(path).url) { data, response, error in
+        let task = URLSession.shared.dataTask(with: Endpoints.ThumbnailImage(path).url) { data, response, error in
             DispatchQueue.main.async {
                 completion(data, error)
             }
         }
         task.resume()
     }
-}
-
-struct Secrets {
-    var apiKey: String
+    
+    class func downloadPosterImage(path: String, completion: @escaping (Data?, Error?) -> Void) {
+        let task = URLSession.shared.dataTask(with: Endpoints.PosterImage(path).url) { data, response, error in
+            DispatchQueue.main.async {
+                completion(data, error)
+            }
+        }
+        
+        task.resume()
+    }
+    
+    class func getMovieDetails(byId id: Int, completion: @escaping (MovieDetails?, Error?) -> Void) -> URLSessionTask {
+        
+        let task = taskForGETRequest(
+            url: Endpoints.MovieDetails(id).url,
+            responseType: MovieDetails.self
+        ) { (response, error) in
+               
+               if let details = response {
+                   completion(details, nil)
+               } else {
+                   completion(nil, error)
+               }
+               
+           }
+           
+           return task
+           
+    }
 }

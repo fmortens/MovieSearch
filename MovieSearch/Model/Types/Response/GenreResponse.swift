@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct GenreResults: Codable {
+struct GenreResponse: Codable {
     let genres: [Genre]
     
     enum CodingKeys: String, CodingKey {
