@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MovieListController.swift
 //  MovieSearch
 //
 //  Created by Frank Mortensen on 28/09/2019.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MovieListController: UIViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -33,7 +33,7 @@ class MainViewController: UIViewController {
 
 }
 
-extension MainViewController: UISearchBarDelegate {
+extension MovieListController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchTask?.cancel()
@@ -62,7 +62,7 @@ extension MainViewController: UISearchBarDelegate {
     
 }
 
-extension MainViewController: UITableViewDataSource, UITableViewDelegate {
+extension MovieListController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -96,7 +96,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
 }
 
-extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension MovieListController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
     }
