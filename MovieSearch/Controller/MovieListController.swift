@@ -21,12 +21,10 @@ class MovieListController: UIViewController {
     
     var movies = [Movie]()
     var genres = [Genre]()
-    
+    var reversedSort = false
     var selectedIndex = 0
-    
     var searchTask: URLSessionTask?
     var genreTask: URLSessionTask?
-    
     let sortOptions: [SortOption] = [.Year, .Title]
     
     override func viewDidLoad() {
@@ -46,11 +44,20 @@ class MovieListController: UIViewController {
             
             switch selectedSortOption {
                 case .Title:
-                    return first.title < second.title
+                    
+                    if reversedSort {
+                        return first.title > second.title
+                    } else {
+                        return first.title < second.title
+                    }
                 
                 default:
                     // Setting the default to release year since it is the first of only two
-                    return first.releaseYear > second.releaseYear
+                    if reversedSort {
+                        return first.releaseYear < second.releaseYear
+                    } else {
+                        return first.releaseYear > second.releaseYear
+                    }
                     
             }
         }
@@ -66,10 +73,10 @@ extension MovieListController: UISearchBarDelegate {
         searchTask?.cancel()
                 
         searchTask = MovieDBClient.searchMovies(query: searchText) { (movies, error) in
-            self.movies = movies
             
+            self.movies = movies
             self.sortMovies()
-            //self.movieTableView.reloadData()
+            
         }
     }
     
@@ -137,6 +144,8 @@ extension MovieListController: UICollectionViewDataSource, UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SortOptionCell", for: indexPath) as! SortOptionCell
         
+        cell.sortOptionLabel.text = SortOption.allCases[indexPath.row].rawValue
+        
         return cell
     }
     
@@ -155,6 +164,8 @@ extension MovieListController: UICollectionViewDataSource, UICollectionViewDeleg
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        reversedSort = !reversedSort
+        
         updateCell(withIndexPath: indexPath)
     }
     
@@ -176,8 +187,6 @@ extension MovieListController: UICollectionViewDataSource, UICollectionViewDeleg
             cellColor = .systemOrange
             textColor = .black
             textFont = UIFont.boldSystemFont(ofSize: 17.0)
-            
-            print("Selected \(sortOptions[indexPath.row])")
         }
         
         cell.SortOptionView.backgroundColor = cellColor
