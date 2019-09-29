@@ -158,9 +158,9 @@
                     </view>
                     <navigationItem key="navigationItem" title="Movie Search" id="W13-9Q-2Ej"/>
                     <connections>
-                        <outlet property="collectionView" destination="YOn-yn-6XU" id="olc-QV-T9X"/>
+                        <outlet property="movieTableView" destination="csg-wt-buk" id="SmD-y1-EKr"/>
                         <outlet property="searchBar" destination="oGG-MV-ktE" id="Yon-u1-uNd"/>
-                        <outlet property="tableView" destination="csg-wt-buk" id="SmD-y1-EKr"/>
+                        <outlet property="sortOptionsCollectionView" destination="YOn-yn-6XU" id="olc-QV-T9X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uhl-by-zgq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -15,7 +15,11 @@ class MovieCell: UITableViewCell {
     @IBOutlet weak var genreLabel: UILabel!
     @IBOutlet weak var thumbnail: UIImageView!
     
+    var movieId: Int?
+    
     func configure(movie: Movie, genres availableGenres: [Genre]) {
+        
+        movieId = movie.id
         
         titleLabel.text = movie.title != "" ? movie.title : movie.originalTitle
         releaseYearLabel.text = "Released \(movie.releaseYear)"

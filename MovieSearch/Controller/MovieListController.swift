@@ -11,8 +11,8 @@ import UIKit
 class MovieListController: UIViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var movieTableView: UITableView!
+    @IBOutlet weak var sortOptionsCollectionView: UICollectionView!
     
     var movies = [Movie]()
     var genres = [Genre]()
@@ -40,7 +40,7 @@ extension MovieListController: UISearchBarDelegate {
                 
         searchTask = MovieDBClient.searchMovies(query: searchText) { (movies, error) in
             self.movies = movies
-            self.tableView.reloadData()
+            self.movieTableView.reloadData()
         }
     }
     
@@ -88,10 +88,14 @@ extension MovieListController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        view.endEditing(true)
-//        selectedIndex = indexPath.row
-//        performSegue(withIdentifier: "showDetail", sender: nil)
-//        tableView.deselectRow(at: indexPath, animated: true)
+        // view.endEditing(true)
+        // selectedIndex = indexPath.row
+        // performSegue(withIdentifier: "showDetail", sender: nil)
+        // tableView.deselectRow(at: indexPath, animated: true)
+        
+        if let cell = movieTableView.cellForRow(at: indexPath) as? MovieCell {
+            print("pressed \(cell.movieId!)")
+        }
     }
     
 }
