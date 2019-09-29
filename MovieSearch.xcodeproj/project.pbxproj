@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DED46D452340AE7F0071A579 /* SortOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED46D442340AE7F0071A579 /* SortOptionCell.swift */; };
+		DED46D472340C67F0071A579 /* MovieDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED46D462340C67F0071A579 /* MovieDetailController.swift */; };
 		DEF9CECC233FA84B00FEF305 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF9CECB233FA84B00FEF305 /* AppDelegate.swift */; };
 		DEF9CECE233FA84B00FEF305 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF9CECD233FA84B00FEF305 /* SceneDelegate.swift */; };
 		DEF9CED0233FA84B00FEF305 /* MovieListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF9CECF233FA84B00FEF305 /* MovieListController.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		DED46D442340AE7F0071A579 /* SortOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOptionCell.swift; sourceTree = "<group>"; };
+		DED46D462340C67F0071A579 /* MovieDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailController.swift; sourceTree = "<group>"; };
 		DEF9CEC8233FA84B00FEF305 /* MovieSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEF9CECB233FA84B00FEF305 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEF9CECD233FA84B00FEF305 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				DEF9CECF233FA84B00FEF305 /* MovieListController.swift */,
+				DED46D462340C67F0071A579 /* MovieDetailController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 				DEF9CEEA233FAFA700FEF305 /* MovieResults.swift in Sources */,
 				DEF9CECE233FA84B00FEF305 /* SceneDelegate.swift in Sources */,
 				DED46D452340AE7F0071A579 /* SortOptionCell.swift in Sources */,
+				DED46D472340C67F0071A579 /* MovieDetailController.swift in Sources */,
 				DEF9CEEC233FB06000FEF305 /* MovieDBResponse.swift in Sources */,
 				DEF9CEE4233FA8B100FEF305 /* Movie.swift in Sources */,
 			);

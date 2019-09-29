@@ -22,10 +22,11 @@ class MovieListController: UIViewController {
     var movies = [Movie]()
     var genres = [Genre]()
     var reversedSort = false
-    var selectedIndex = 0
+    var selectedSortId = 0
     var searchTask: URLSessionTask?
     var genreTask: URLSessionTask?
     let sortOptions: [SortOption] = [.Year, .Title]
+    var selectedMovieId: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +39,7 @@ class MovieListController: UIViewController {
     
     func sortMovies() {
         
-        let selectedSortOption = sortOptions[selectedIndex]
+        let selectedSortOption = sortOptions[selectedSortId]
         
         movies.sort { (first, second) -> Bool in
             
@@ -124,13 +125,19 @@ extension MovieListController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        // view.endEditing(true)
-        // selectedIndex = indexPath.row
-        // performSegue(withIdentifier: "showDetail", sender: nil)
-        // tableView.deselectRow(at: indexPath, animated: true)
-        
         if let cell = movieTableView.cellForRow(at: indexPath) as? MovieCell {
-            print("pressed \(cell.movieId!)")
+            selectedMovieId = cell.movieId
+            
+            performSegue(withIdentifier: "ShowMovieDetails", sender: self)
+            
+            movieTableView.deselectRow(at: indexPath, animated: false)
+        }
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationController = segue.destination as? MovieDetailController {
+            destinationController.movieId = selectedMovieId
         }
     }
     
@@ -155,7 +162,7 @@ extension MovieListController: UICollectionViewDataSource, UICollectionViewDeleg
             
             updateCell(withIndexPath: ip)
             
-            selectedIndex = indexPath.row
+            selectedSortId = indexPath.row
             
             sortMovies()
         }
