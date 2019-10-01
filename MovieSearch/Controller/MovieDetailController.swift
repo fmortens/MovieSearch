@@ -30,6 +30,12 @@ class MovieDetailController: UIViewController {
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        detailsTask?.cancel()
+    }
+    
     func updateUI(movieId id: Int) {
         
         detailsTask = MovieDBClient.getMovieDetails(byId: id) { (details, error) in
